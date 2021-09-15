@@ -248,22 +248,10 @@ namespace my_std
 		{}
 
 		function_ref (const function_ref &) noexcept = default;
-		function_ref (function_ref && other) noexcept
-			: _pointer (other._pointer)
-			, _function_invoke (other._function_invoke)
-		{
-			other._pointer = nullptr;
-		}
-
+		function_ref (function_ref && other) noexcept = default;
 		function_ref & operator= (const function_ref &) noexcept = default;
 
-		function_ref & operator= (function_ref && other) noexcept
-		{
-			_pointer = other._pointer;
-			_function_invoke = other._function_invoke;
-			other._pointer = nullptr;
-			return *this;
-		}
+		function_ref & operator= (function_ref && other) noexcept = default;
 
 		function_ref & operator=(const std::nullptr_t &) noexcept
 		{
