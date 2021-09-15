@@ -19,10 +19,10 @@ protected:
  * @tparam Case 保存的类型
 */
 template<typename Case>
-class LazySingleCase :SingleCaseBase <Case>
+class HungrySingleCase :SingleCaseBase <Case>
 {
 
-	LazySingleCase () = delete;
+	HungrySingleCase () = delete;
 public:
 	//create,delete不支持多线程安全
 	template<typename ...Args>
@@ -53,7 +53,7 @@ public:
  * @tparam Case 保存的类型
 */
 template<typename Case>
-class HungrySingleCase :SingleCaseBase <Case>
+class LazySingleCase :SingleCaseBase <Case>
 {
 private:
 	//静态变量的析构顺序是不确定的，故uptr析构时不能保证ptr的存在性，不对它做处理
@@ -61,7 +61,7 @@ private:
 	inline static std::atomic<Case *> ptr = nullptr;
 	inline static std::mutex mutex = std::mutex ();
 
-	HungrySingleCase () = delete;
+	LazySingleCase () = delete;
 public:
 
 	static Case & instance ()
